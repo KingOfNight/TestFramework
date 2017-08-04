@@ -25,6 +25,8 @@ class testcases(test):
 
 
 def fc():
+    url="http://qr-api.uat.9now.net/pay/api/shop.detail"
+    r=requests.post(url,)
     j={"MemID":"028715840463","PayType":0,"mworderId":"3067158","orderId":"86548","paymentList":[{"couponDiscount":"0","paymentMoney":"0","paymentType":"6","pointPayment":"5","presentCash":"0"}],"phoneNum":"15800514409","status":"pay","tableName":"101","tableNo":"101","total":"5"}
     json_str=json.dumps(j)
 
