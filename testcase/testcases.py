@@ -2,48 +2,62 @@ import requests
 import json
 import types
 
-class shop():
-    __shopId=1    #店铺id
-    __shopName='shopname'  #店铺名
-    __managerShopId=43     #总店id
-    __openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
+class testShop():
+    shopId=1    #店铺id
+    shopName='shopname'  #店铺名
+    managerShopId=43     #总店id
+    openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
     tableNo='001'       #桌名
     tableId='001'       #桌号
     def __init__(self,shopId,shopName,managerShopId,openId):
+        self.shopId=shopId
+        self.shopName=shopName
+        self.managerShopId=managerShopId
+        self.openId=openId
         return
 
     #set properties
     def set_shopname(self,shopName):
-        self.__shopName=shopName
+        self.shopName=shopName
         return
     def set_shopid(self,shopId):
-        self.__shopId=shopId
+        self.shopId=shopId
         return
     def set_managershopid(self,managerShopId):
-        self.__managerShopId=managerShopId
+        self.managerShopId=managerShopId
         return
     def set_openid(self,openId):
-        self.__openId=openId
+        self.openId=openId
         return
 
     #get properties
     def get_shopid(self):
-        return self.__shopId
+        return self.shopId
     def get_shopname(self):
-        return self.__shopName
+        return self.shopName
     def get_managershopid(self):
-        return
+        return self.managerShopId
     def get_openid(self):
-        return
+        return self.openId
 
 class helper():
+    orderUrl="http://qr-api.uat.9now.net/pay/api/order.detail"
+    headers = {'Accept': 'application/json'}
     thirdAccess = '3'       #连接方式3 为第三方餐饮系统
     def __init__(self):
         return
 
-class testcases():
+    def get_order(self,shopId,tableId,tableNo,managerShopId,shopName,thirdAccess,openId):
+        orderData = {'shopId': shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId': managerShopId,
+                     'shopName': shopName, 'thirdAccess': thirdAccess, 'openid': openId}
+        try:
+            orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
+            orderInform.status_code
+        except:
+        return
 
-    mwshop=shop()
+class testCases():
+    mwshop=testShop()
     def check_discount(self):
         return
     def check_items(self):
