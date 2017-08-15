@@ -3,18 +3,47 @@ import json
 import types
 
 class shop():
-    shopId=1    #店铺id
-    shopName='shopname'  #店铺名
-    managerShopId=43     #总店id
-    openid = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
-    def shop(self):
+    __shopId=1    #店铺id
+    __shopName='shopname'  #店铺名
+    __managerShopId=43     #总店id
+    __openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
+    tableNo='001'       #桌名
+    tableId='001'       #桌号
+    def __init__(self):
+        return
 
+    #set properties
+    def set_shopname(self,shopName):
+        self.__shopName=shopName
         return
-    def set_shop_name(self,shopName):
-        shopName=
+    def set_shopid(self,shopId):
+        self.__shopId=shopId
         return
+    def set_managershopid(self,managerShopId):
+        self.__managerShopId=managerShopId
+        return
+    def set_openid(self,openId):
+        self.__openId=openId
+        return
+
+    #get properties
+    def get_shopid(self):
+        return self.__shopId
+    def get_shopname(self):
+        return self.__shopName
+    def get_managershopid(self):
+        return
+    def get_openid(self):
+        return
+
+class order():
+
+    def __init__(self):
+        return
+
 class testcases():
-    def check_price(self):
+    mwshop=shop()
+    def check_discount(self):
         return
     def check_items(self):
         return
@@ -33,6 +62,7 @@ def get_dict_value(keyName,dictName):
             if(isinstance(val,dict)):
                 get_dict_value(keyName,val)
     return
+
 
 def compare_dict(dict1,dict2):
 
