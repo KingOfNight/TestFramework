@@ -9,7 +9,7 @@ class shop():
     __openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
     tableNo='001'       #桌名
     tableId='001'       #桌号
-    def __init__(self):
+    def __init__(self,shopId,shopName,managerShopId,openId):
         return
 
     #set properties
@@ -36,12 +36,13 @@ class shop():
     def get_openid(self):
         return
 
-class order():
-
+class helper():
+    thirdAccess = '3'       #连接方式3 为第三方餐饮系统
     def __init__(self):
         return
 
 class testcases():
+
     mwshop=shop()
     def check_discount(self):
         return
