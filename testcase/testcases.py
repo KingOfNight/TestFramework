@@ -16,7 +16,7 @@ class testShop():
         self.openId=openId
         return
 
-    #set properties
+    @property.setter
     def set_shopname(self,shopName):
         self.shopName=shopName
         return
@@ -29,8 +29,14 @@ class testShop():
     def set_openid(self,openId):
         self.openId=openId
         return
+    def set_tableNo(self,tableNo):
+        self.tableNo=tableNo
+        return
+    def set_tableId(self,tableId):
+        self.tableId=tableId
+        return
 
-    #get properties
+    @property.getter
     def get_shopid(self):
         return self.shopId
     def get_shopname(self):
@@ -39,6 +45,10 @@ class testShop():
         return self.managerShopId
     def get_openid(self):
         return self.openId
+    def get_tableNo(self):
+        return self.tableNo
+    def get_tableId(self):
+        return self.tableId
 
 class helper():
     orderUrl="http://qr-api.uat.9now.net/pay/api/order.detail"
@@ -54,19 +64,29 @@ class helper():
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
             orderInform.status_code
         except:
-<<<<<<< HEAD
-=======
             print("connect error!")
         return orderInform.json()
 
-    def compare_dict(dicFirst,dictSecend):
+    def compare_dict(correctData,getData):
+        correctData
         return
-    def check_orderinform(self):
->>>>>>> 2d296938f98d53d00fffdb445d3c41db74835670
-        return
+
+    #获取字典中某一属性的值
+    def get_dict_value(keyName, dictName):
+        for key, val in dictName.items():
+            print(key)
+            if (key == keyName):
+                print(val)
+                return val
+            else:
+                if (isinstance(val, dict)):
+                    get_dict_value(keyName, val)
+        return False
 
 class testCases():
     mwshop=testShop()
+    def check_orderinform(self):
+        return
     def check_discount(self):
         return
     def check_items(self):
@@ -75,23 +95,6 @@ class testCases():
         return
     def check_memberoff(self):
         return
-
-def get_dict_value(keyName,dictName):
-    for key,val in dictName.items():
-        print(key)
-        if (key ==keyName):
-            print(val)
-            return val
-        else:
-            if(isinstance(val,dict)):
-                get_dict_value(keyName,val)
-    return
-
-
-def compare_dict(dict1,dict2):
-
-    return
-
 
 def get_shop():
     shopUrl="http://qr-api.uat.9now.net/pay/api/shop.detail"
@@ -107,7 +110,7 @@ def get_shop():
         print("出现异常")
     else:
         print(shopInform.json())
-    return -1
+    return
 
 def get_order():
     shopId='140375'
@@ -136,6 +139,3 @@ def main():
         print("error")
     else:
         print(discountAmountPayValue)
-str=get_order()
-
-get_dict_value('discountAmountPay',str)
