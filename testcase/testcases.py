@@ -54,6 +54,15 @@ class helper():
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
             orderInform.status_code
         except:
+<<<<<<< HEAD
+=======
+            print("connect error!")
+        return orderInform.json()
+
+    def compare_dict(dicFirst,dictSecend):
+        return
+    def check_orderinform(self):
+>>>>>>> 2d296938f98d53d00fffdb445d3c41db74835670
         return
 
 class testCases():
