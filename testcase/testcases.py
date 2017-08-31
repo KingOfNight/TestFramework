@@ -72,7 +72,7 @@ class helper():
         return
 
     #获取字典中某一属性的值
-    def get_dict_value(keyName, dictName):
+    def get_dict_value(self,keyName, dictName):
         for key, val in dictName.items():
             print(key)
             if (key == keyName):
@@ -80,10 +80,12 @@ class helper():
                 return val
             else:
                 if (isinstance(val, dict)):
-                    get_dict_value(keyName, val)
+                    self.get_dict_value(keyName, val)
         return False
 
-class testCases():
+class testCaseSetup():
+    def __init__(self):
+        return
     mwshop=testShop()
     def check_orderinform(self):
         return
@@ -94,6 +96,11 @@ class testCases():
     def check_saleoff(self):
         return
     def check_memberoff(self):
+        return
+
+class portion_salesoff(testCaseSetup):
+    def order_two_onsale_dishes(self):
+
         return
 
 def get_shop():
@@ -129,13 +136,3 @@ def get_order():
     else:
         print(orderInform.json())
     return orderInform.json()
-
-def main():
-    keyName='discountAmountPay'
-    try:
-        orderDict=get_order()
-        discountAmountPayValue=get_dict_value(keyName,orderDict)
-    except BaseException:
-        print("error")
-    else:
-        print(discountAmountPayValue)
