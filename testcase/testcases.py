@@ -87,6 +87,10 @@ class testCaseSetup():
     def __init__(self):
         return
     mwshop=testShop()
+    def setup(self):
+        return
+    def cleanup(self):
+        return
     def check_orderinform(self):
         return
     def check_discount(self):
@@ -97,11 +101,12 @@ class testCaseSetup():
         return
     def check_memberoff(self):
         return
-
-class portion_salesoff(testCaseSetup):
-    def order_two_onsale_dishes(self):
-
+    def check_order_two_onsale_dishes(self):
         return
+
+class boYouTestCase(testCaseSetup):
+    def __init__(self):
+        self.setup()
 
 def get_shop():
     shopUrl="http://qr-api.uat.9now.net/pay/api/shop.detail"
