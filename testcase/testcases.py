@@ -9,6 +9,10 @@ class testShop():
     openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
     tableNo='001'       #桌名
     tableId='001'       #桌号
+    orderUrl = "http://qr-api.uat.9now.net/pay/api/order.detail"
+    headers = {'Accept': 'application/json'}
+    thirdAccess = '3'  # 连接方式3 为第三方餐饮系统
+
     def __init__(self,shopId,shopName,managerShopId,openId):
         self.shopId=shopId
         self.shopName=shopName
@@ -50,13 +54,7 @@ class testShop():
     def get_tableId(self):
         return self.tableId
 
-class helper():
-    orderUrl="http://qr-api.uat.9now.net/pay/api/order.detail"
-    headers = {'Accept': 'application/json'}
-    thirdAccess = '3'       #连接方式3 为第三方餐饮系统
-    def __init__(self):
-        return
-
+    @classmethod
     def get_order(self,shopId,tableId,tableNo,managerShopId,shopName,thirdAccess,openId):
         orderData = {'shopId': shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId': managerShopId,
                      'shopName': shopName, 'thirdAccess': thirdAccess, 'openid': openId}
@@ -67,6 +65,22 @@ class helper():
             print("connect error!")
         return orderInform.json()
 
+
+class helper():
+    def __init__(self):
+        return
+    def check_orderinform(self):
+        return
+    def check_discount(self):
+        return
+    def check_items(self):
+        return
+    def check_saleoff(self):
+        return
+    def check_memberoff(self):
+        return
+    def check_order_two_onsale_dishes(self):
+        return
     def compare_dict(correctData,getData):
         correctData
         return
@@ -91,21 +105,11 @@ class testCaseSetup():
         return
     def cleanup(self):
         return
-    def check_orderinform(self):
-        return
-    def check_discount(self):
-        return
-    def check_items(self):
-        return
-    def check_saleoff(self):
-        return
-    def check_memberoff(self):
-        return
-    def check_order_two_onsale_dishes(self):
-        return
+
 
 class boYouTestCase(testCaseSetup):
     softwareName='博优'
+    tableDict={}
     def __init__(self):
         self.setup(self.softwareName)
         return
