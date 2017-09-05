@@ -105,8 +105,13 @@ class testCaseSetup():
         return
 
 class boYouTestCase(testCaseSetup):
+    softwareName='博优'
     def __init__(self):
-        self.setup()
+        self.setup(self.softwareName)
+        return
+    def normal_dishes(self):
+        self.ge
+        return
 
 def get_shop():
     shopUrl="http://qr-api.uat.9now.net/pay/api/shop.detail"
@@ -124,20 +129,4 @@ def get_shop():
         print(shopInform.json())
     return
 
-def get_order():
-    shopId='140375'
-    managerShopId='43'
-    shopName='美味不用等(正大广场店)'
-    thirdAccess='3'
-    openid='oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
-    #code='6ie713nrt5e939'
-    orderUrl="http://qr-api.uat.9now.net/pay/api/order.detail"
-    headers = {'Accept': 'application/json'}
-    orderData ={'shopId':shopId,'tableId':'001','tableNo':'001','managerShopId':managerShopId,'shopName':shopName,'thirdAccess':thirdAccess,'openid':openid}
-    try:
-        orderInform=requests.post(orderUrl,data=orderData,headers=headers)
-    except BaseException:
-        print("errors")
-    else:
-        print(orderInform.json())
-    return orderInform.json()
+
