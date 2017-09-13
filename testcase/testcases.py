@@ -55,16 +55,15 @@ class testShop():
         return self.tableId
 
     @classmethod
-    def get_order(self,shopId,tableId,tableNo,managerShopId,shopName,thirdAccess,openId):
-        orderData = {'shopId': shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId': managerShopId,
-                     'shopName': shopName, 'thirdAccess': thirdAccess, 'openid': openId}
+    def get_order(self,tableId,tableNo):
+        orderData = {'shopId': self.shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId':self.managerShopId,
+                     'shopName': self.shopName, 'thirdAccess': self.thirdAccess, 'openid': self.openId}
         try:
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
             orderInform.status_code
         except:
             print("connect error!")
         return orderInform.json()
-
 
 class helper():
     def __init__(self):
@@ -97,14 +96,21 @@ class helper():
                     self.get_dict_value(keyName, val)
         return False
 
-class testCaseSetup():
+class testCaseSetup(testShop):
     def __init__(self):
         return
-    mwshop=testShop()
     def setup(self):
         return
     def cleanup(self):
         return
+
+class zhiHuiTestCase(testCaseSetup):
+    tip=10
+    def check_tips(self,tip):
+        self.get_order()
+        return
+    def check_mutiSetMeal(self,):
+        return 
 
 
 class boYouTestCase(testCaseSetup):
