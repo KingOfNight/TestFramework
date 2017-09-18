@@ -107,10 +107,19 @@ class testCaseSetup(testShop):
 class zhiHuiTestCase(testCaseSetup):
     tip=10
     def check_tips(self,tip):
-        self.get_order()
-        return
+        tableId=002
+        tableName=002
+        orderJs=helper
+        value=''
+        ordertip=orderJs.get_dict_value(value,self.get_order(tableId,tableName))
+        if(orderJs):
+            if (tip ===ordertip):
+                return
+        else
+            return
+
     def check_mutiSetMeal(self,):
-        return 
+        return
 
 
 class boYouTestCase(testCaseSetup):
