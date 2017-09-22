@@ -9,7 +9,9 @@ class testShop():
     openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
     tableNo='001'       #桌名
     tableId='001'       #桌号
-    orderUrl = "http://qr-api.uat.9now.net/pay/api/order.detail"
+    shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"      #获取店铺信息
+    orderUrl = "http://qr-api.uat.9now.net/pay/api/order.detail"        #获取订单信息
+
     headers = {'Accept': 'application/json'}
     thirdAccess = '3'  # 连接方式3 为第三方餐饮系统
 
@@ -55,6 +57,22 @@ class testShop():
         return self.tableId
 
     @classmethod
+    def get_shop(self):
+        shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"
+        # shopId=140375&tableId=101&tableNo=101&codeType=1&openid=oWT18jmvvJ50Q-GhEPUeY0cgAp4U&userid=39218614&fromw=2
+        # shopData={'shopId':'140375','tableId':'101','tableNo':'101','codeType':'1','openid':'oWT18jmvvJ50Q-GhEPUeY0cgAp4U','userid':'39218614','fromw':'2'}
+        shopData = {'shopId': '140375', 'openid': 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U', 'fromw': '2'}
+        headers = {'Accept': 'application/json'}
+        try:
+            shopInform = requests.post(shopUrl, data=shopData, headers=headers)
+            shop = shopInform.json()
+            isinstance(shop, dict)
+        except BaseException:
+            print("出现异常")
+        else:
+            print(shopInform.json())
+        return
+
     def get_order(self,tableId,tableNo):
         orderData = {'shopId': self.shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId':self.managerShopId,
                      'shopName': self.shopName, 'thirdAccess': self.thirdAccess, 'openid': self.openId}
@@ -64,6 +82,8 @@ class testShop():
         except:
             print("connect error!")
         return orderInform.json()
+    def make_order(self):
+        return
 
 class helper():
     def __init__(self):
@@ -106,9 +126,10 @@ class testCaseSetup(testShop):
 
 class zhiHuiTestCase(testCaseSetup):
     tip=10
+    #校验服务费
     def check_tips(self,tip):
-        tableId=002
-        tableName=002
+        tableId='002'
+        tableName='002'
         orderJs=helper
         value=''
         ordertip=orderJs.get_dict_value(value,self.get_order(tableId,tableName))
@@ -132,20 +153,5 @@ class boYouTestCase(testCaseSetup):
         self.ge
         return
 
-def get_shop():
-    shopUrl="http://qr-api.uat.9now.net/pay/api/shop.detail"
-    #shopId=140375&tableId=101&tableNo=101&codeType=1&openid=oWT18jmvvJ50Q-GhEPUeY0cgAp4U&userid=39218614&fromw=2
-    #shopData={'shopId':'140375','tableId':'101','tableNo':'101','codeType':'1','openid':'oWT18jmvvJ50Q-GhEPUeY0cgAp4U','userid':'39218614','fromw':'2'}
-    shopData={'shopId':'140375','openid':'oWT18jmvvJ50Q-GhEPUeY0cgAp4U','fromw':'2'}
-    headers={'Accept':'application/json'}
-    try:
-        shopInform=requests.post(shopUrl,data=shopData,headers=headers)
-        shop=shopInform.json()
-        isinstance(shop,dict)
-    except BaseException:
-        print("出现异常")
-    else:
-        print(shopInform.json())
-    return
 
 
