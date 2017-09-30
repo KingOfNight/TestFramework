@@ -124,6 +124,7 @@ class testCaseSetup(testShop):
     def cleanup(self):
         return
 
+#智慧餐饮系统
 class zhiHuiTestCase(testCaseSetup):
     tip=10
     #校验服务费
@@ -134,23 +135,23 @@ class zhiHuiTestCase(testCaseSetup):
         value=''
         ordertip=orderJs.get_dict_value(value,self.get_order(tableId,tableName))
         if(orderJs):
-            if (tip ===ordertip):
+            if (tip ==ordertip):
                 return
-        else
+        else:
+            print('应收服务费与拉取服务费不同')
             return
 
     def check_mutiSetMeal(self,):
         return
 
-
+#博优3.1
 class boYouTestCase(testCaseSetup):
-    softwareName='博优'
     tableDict={}
     def __init__(self):
         self.setup(self.softwareName)
         return
     def normal_dishes(self):
-        self.ge
+        self.get_order()
         return
 
 
