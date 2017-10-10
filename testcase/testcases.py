@@ -125,7 +125,7 @@ class testCaseSetup(testShop):
         return
 
 #智慧餐饮系统
-class zhiHuiTestCase(testCaseSetup):
+class zhiHuiTestCases(testCaseSetup):
     tip=10
     #校验服务费
     def check_tips(self,tip):
@@ -145,7 +145,7 @@ class zhiHuiTestCase(testCaseSetup):
         return
 
 #博优3.1
-class boYouTestCase(testCaseSetup):
+class boYouTestCases(testCaseSetup):
     tableDict={}
     def __init__(self):
         self.setup(self.softwareName)
@@ -154,5 +154,16 @@ class boYouTestCase(testCaseSetup):
         self.get_order()
         return
 
-
+#天财商龙
+class tianCaiShangLongTestCases(testCaseSetup):
+    def __init__(self):
+        self.setup(self)
+        return
+    def normal_dishes(self):
+        tableId='001'
+        tableNo='001'
+        expectInfo={'dishname':'普通菜','price':10}
+        orderInfo=self.get_order(tableId,tableNo)
+        helper.get_dict_value()
+        return
 
