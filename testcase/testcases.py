@@ -1,6 +1,7 @@
 import requests
 import json
 import types
+import unittest
 
 class testShop():
     shopId=1    #店铺id
