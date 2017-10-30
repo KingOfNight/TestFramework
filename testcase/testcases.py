@@ -15,14 +15,15 @@ class testShop():
     headers = {'Accept': 'application/json'}
     thirdAccess = '3'  # 连接方式3 为第三方餐饮系统
 
+    def __init__(self):
+        return
+
     def __init__(self,shopId,shopName,managerShopId,openId):
         self.shopId=shopId
         self.shopName=shopName
         self.managerShopId=managerShopId
         self.openId=openId
         return
-
-    @property.setter
     def set_shopname(self,shopName):
         self.shopName=shopName
         return
@@ -42,7 +43,6 @@ class testShop():
         self.tableId=tableId
         return
 
-    @property.getter
     def get_shopid(self):
         return self.shopId
     def get_shopname(self):
@@ -105,7 +105,7 @@ class helper():
         return
 
     #获取字典中某一属性的值
-    def get_dict_value(self,keyName, dictName):
+    '''def get_dict_value(self,keyName, dictName):
         for key, val in dictName.items():
             print(key)
             if (key == keyName):
@@ -114,7 +114,7 @@ class helper():
             else:
                 if (isinstance(val, dict)):
                     self.get_dict_value(keyName, val)
-        return False
+        return '''''
 
 class testCaseSetup(testShop):
     def __init__(self):
@@ -156,14 +156,13 @@ class boYouTestCases(testCaseSetup):
 
 #天财商龙
 class tianCaiShangLongTestCases(testCaseSetup):
-    def __init__(self):
-        self.setup(self)
-        return
     def normal_dishes(self):
         tableId='001'
         tableNo='001'
         expectInfo={'dishname':'普通菜','price':10}
         orderInfo=self.get_order(tableId,tableNo)
-        helper.get_dict_value()
+        s=helper.get_dict_value('goods',orderInfo)
+        print(s)
         return
+
 
