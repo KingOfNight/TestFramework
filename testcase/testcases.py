@@ -170,7 +170,7 @@ class tianCaiShangLongTestCases(testCaseSetup):
 
 class FlashPay(unittest.TestCase):
     def test_normal_dishes(self):
-        return 
+        return
     pass
 
 
