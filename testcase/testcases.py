@@ -154,6 +154,8 @@ class boYouTestCases(testCaseSetup):
     def normal_dishes(self):
         self.get_order()
         return
+    pass
+
 
 #天财商龙
 class tianCaiShangLongTestCases(testCaseSetup):
@@ -165,5 +167,7 @@ class tianCaiShangLongTestCases(testCaseSetup):
         s=helper.get_dict_value('goods',orderInfo)
         print(s)
         return
+    pass
+
 
 
