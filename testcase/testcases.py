@@ -87,7 +87,7 @@ class testShop():
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
             orderInform.status_code
         except:
-            print("connect error!")
+            print("获取订单信息失败")
         return orderInform.json()
     def make_order(self):
         return
@@ -174,17 +174,23 @@ class tianCaiShangLongTestCases(testCaseSetup):
     pass
 
 class FlashOrder(unittest.TestCase,testShop):
+    #普通菜拉单、5折扣菜拉单、特价菜拉单
     def test_normal_dishes(self):
         tableId = '001'
         tableNo = '001'
-        expectInfo = {'dishname': '普通菜', 'price': 10}
         orderInfo = self.get_order(tableId, tableNo)
-        if(isinstance(orderInfo,dict)):
-            data=orderInfo.get('data')
-            dishs=data.get('goods','该健不存在')
+        try:
+            if(isinstance(orderInfo,dict)):
+                data=orderInfo.get('data')
+                if(isinstance(data,dict)):
+                    dishs=data.get('goods','该健不存在')
+                    for key,val in dishs.items():
 
-        print(orderInfo)
-        print(dishs)
+            else:
+                print(orderInfo)
+        except:
+            print("get dishes error")
+
         pass
 
     pass
