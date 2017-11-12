@@ -159,10 +159,6 @@ class boYouTestCases(testCaseSetup):
         self.get_order()
         return
     pass
-<<<<<<< HEAD
-=======
-
->>>>>>> 5fa97d6e9370f2d3bd0252363e335210833a142a
 
 #天财商龙
 class tianCaiShangLongTestCases(testCaseSetup):
@@ -176,12 +172,6 @@ class tianCaiShangLongTestCases(testCaseSetup):
         return
     pass
 
-<<<<<<< HEAD
-class FlashPay(unittest.TestCase):
-    def test_normal_dishes(self):
-        return
-    pass
-=======
 class FlashOrder(unittest.TestCase,testShop):
     #普通菜拉单、5折扣菜拉单、特价菜拉单
     def test_normal_dishes(self):
@@ -193,14 +183,15 @@ class FlashOrder(unittest.TestCase,testShop):
                 data=orderInfo.get('data')
                 if(isinstance(data,dict)):
                     dishs=data.get('goods','该健不存在')
-                    for key,val in dishs.items():
+                    try:
+                        dish=dishs.items()
+                    except:
+                        print()
 
             else:
                 print(orderInfo)
         except:
             print("get dishes error")
->>>>>>> 5fa97d6e9370f2d3bd0252363e335210833a142a
-
         pass
 
     pass
