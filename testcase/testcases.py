@@ -2,16 +2,21 @@ import requests
 import json
 import types
 import unittest
+import re
 
 class testShop():
-    shopId=1    #店铺id
-    shopName='shopname'  #店铺名
+    shopId=140375    #店铺id
+    shopName='美味不用等(正大广场店)'  #店铺名
     managerShopId=43     #总店id
     openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
+    userId=853
+    fromw=2
+    businessType=0
+    mwAuthToken='IT9EcX-CFGmpRL4hgjqBjNRU5Y-BYSEr8SvX-CL7koUT51waZQYuIu7trAAhNO4eNfBjly3uPS7EdGU0bsTEXDkiubfunR1HR9hsoFgrDEhipJE3k-Z'
     tableNo='001'       #桌名
     tableId='001'       #桌号
     shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"      #获取店铺信息
-    orderUrl = "http://qr-api.uat.9now.net/pay/api/order.detail"        #获取订单信息
+    orderUrl = "http://qr-st.api.9now.net/pay/api/order.detail"        #获取订单信息
 
     headers = {'Accept': 'application/json'}
     thirdAccess = '3'  # 连接方式3 为第三方餐饮系统
@@ -59,7 +64,7 @@ class testShop():
 
     @classmethod
     def get_shop(self):
-        shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"
+        shopUrl = "http://qr-st.mwee.9now.net/pay/api/shop.detail"
         # shopId=140375&tableId=101&tableNo=101&codeType=1&openid=oWT18jmvvJ50Q-GhEPUeY0cgAp4U&userid=39218614&fromw=2
         # shopData={'shopId':'140375','tableId':'101','tableNo':'101','codeType':'1','openid':'oWT18jmvvJ50Q-GhEPUeY0cgAp4U','userid':'39218614','fromw':'2'}
         shopData = {'shopId': '140375', 'openid': 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U', 'fromw': '2'}
@@ -76,12 +81,13 @@ class testShop():
 
     def get_order(self,tableId,tableNo):
         orderData = {'shopId': self.shopId, 'tableId': tableId, 'tableNo':tableNo, 'managerShopId':self.managerShopId,
-                     'shopName': self.shopName, 'thirdAccess': self.thirdAccess, 'openid': self.openId}
+                     'shopName': self.shopName, 'thirdAccess': self.thirdAccess, 'openid': self.openId,'userid':self.userId,
+                     'businessType':self.businessType,'fromw':self.fromw,'mwAuthToken':self.mwAuthToken}
         try:
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
             orderInform.status_code
         except:
-            print("connect error!")
+            print("获取订单信息失败")
         return orderInform.json()
     def make_order(self):
         return
@@ -106,16 +112,14 @@ class helper():
         return
 
     #获取字典中某一属性的值
-    '''def get_dict_value(self,keyName, dictName):
+    def get_dict_value(self,keyName, dictName):
         for key, val in dictName.items():
-            print(key)
             if (key == keyName):
-                print(val)
                 return val
             else:
                 if (isinstance(val, dict)):
-                    self.get_dict_value(keyName, val)
-        return '''''
+                    self.get_dict_value(keyName,val)
+        return
 
 class testCaseSetup(testShop):
     def __init__(self):
@@ -155,6 +159,10 @@ class boYouTestCases(testCaseSetup):
         self.get_order()
         return
     pass
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fa97d6e9370f2d3bd0252363e335210833a142a
 
 #天财商龙
 class tianCaiShangLongTestCases(testCaseSetup):
@@ -168,9 +176,31 @@ class tianCaiShangLongTestCases(testCaseSetup):
         return
     pass
 
+<<<<<<< HEAD
 class FlashPay(unittest.TestCase):
     def test_normal_dishes(self):
         return
     pass
+=======
+class FlashOrder(unittest.TestCase,testShop):
+    #普通菜拉单、5折扣菜拉单、特价菜拉单
+    def test_normal_dishes(self):
+        tableId = '001'
+        tableNo = '001'
+        orderInfo = self.get_order(tableId, tableNo)
+        try:
+            if(isinstance(orderInfo,dict)):
+                data=orderInfo.get('data')
+                if(isinstance(data,dict)):
+                    dishs=data.get('goods','该健不存在')
+                    for key,val in dishs.items():
 
+            else:
+                print(orderInfo)
+        except:
+            print("get dishes error")
+>>>>>>> 5fa97d6e9370f2d3bd0252363e335210833a142a
 
+        pass
+
+    pass
