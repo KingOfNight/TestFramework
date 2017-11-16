@@ -8,11 +8,11 @@ class testShop():
     shopId=140375    #店铺id
     shopName='美味不用等(正大广场店)'  #店铺名
     managerShopId=43     #总店id
-    openId = 'oWT18jmvvJ50Q-GhEPUeY0cgAp4U'
+    openId = 'oi_f8t_w4w0irA90BaCUcX13PiEY'
     userId=853
     fromw=2
     businessType=0
-    mwAuthToken='IT9EcX-CFGmpRL4hgjqBjNRU5Y-BYSEr8SvX-CL7koUT51waZQYuIu7trAAhNO4eNfBjly3uPS7EdGU0bsTEXDkiubfunR1HR9hsoFgrDEhipJE3k-Z'
+    mwAuthToken='JwDqEeW3RwfXxgQIddJvKLyVJY2KWvhKu5QLC3QxS0Isx9b4GC0jYC5xOyECbUU23uPS7EdGU0bsTEXDkiubfunR1HR9hsoFgrDEhipJE3k-Z'
     tableNo='001'       #桌名
     tableId='001'       #桌号
     shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"      #获取店铺信息
@@ -184,6 +184,7 @@ class FlashOrder(unittest.TestCase,testShop):
                 if(isinstance(data,dict)):
                     dishs=data.get('goods','该健不存在')
                     try:
+                        print(dishs)
                         dish=dishs.items()
                     except:
                         print()
@@ -192,6 +193,9 @@ class FlashOrder(unittest.TestCase,testShop):
                 print(orderInfo)
         except:
             print("get dishes error")
+        pass
+
+    def test_set_meal(self):
         pass
 
     pass
