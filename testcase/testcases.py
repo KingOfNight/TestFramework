@@ -12,12 +12,11 @@ class testShop():
     userId=853
     fromw=2
     businessType=0
-    mwAuthToken='JwDqEeW3RwfXxgQIddJvKLyVJY2KWvhKu5QLC3QxS0Isx9b4GC0jYC5xOyECbUU23uPS7EdGU0bsTEXDkiubfunR1HR9hsoFgrDEhipJE3k-Z'
+    mwAuthToken='oU1GzwjVSuSW0py2jhJY-B9owbslwB9nSgWO1yyjUOYUEj64kdNBbpMIz6beuR8sjW3uPS7EdGU0bsTEXDkiubfunR1HR9hsoFgrDEhipJE3k-Z'
     tableNo='001'       #桌名
     tableId='001'       #桌号
     shopUrl = "http://qr-api.uat.9now.net/pay/api/shop.detail"      #获取店铺信息
     orderUrl = "http://qr-st.api.9now.net/pay/api/order.detail"        #获取订单信息
-
     headers = {'Accept': 'application/json'}
     thirdAccess = '3'  # 连接方式3 为第三方餐饮系统
 
@@ -85,9 +84,10 @@ class testShop():
                      'businessType':self.businessType,'fromw':self.fromw,'mwAuthToken':self.mwAuthToken}
         try:
             orderInform = requests.post(self.orderUrl, data=orderData, headers=self.headers)
+            
             orderInform.status_code
         except:
-            print("获取订单信息失败")
+            print("无法请求订单信息失败")
         return orderInform.json()
     def make_order(self):
         return
@@ -121,58 +121,8 @@ class helper():
                     self.get_dict_value(keyName,val)
         return
 
-class testCaseSetup(testShop):
-    def __init__(self):
-        return
-    def setup(self):
-        return
-    def cleanup(self):
-        return
 
-#智慧餐饮系统
-class zhiHuiTestCases(testCaseSetup):
-    tip=10
-    #校验服务费
-    def check_tips(self,tip):
-        tableId='002'
-        tableName='002'
-        orderJs=helper
-        value=''
-        ordertip=orderJs.get_dict_value(value,self.get_order(tableId,tableName))
-        if(orderJs):
-            if (tip ==ordertip):
-                return
-        else:
-            print('应收服务费与拉取服务费不同')
-            return
-
-    def check_mutiSetMeal(self,):
-        return
-
-#博优3.1
-class boYouTestCases(testCaseSetup):
-    tableDict={}
-    def __init__(self):
-        self.setup(self.softwareName)
-        return
-    def normal_dishes(self):
-        self.get_order()
-        return
-    pass
-
-#天财商龙
-class tianCaiShangLongTestCases(testCaseSetup):
-    def normal_dishes(self):
-        tableId='001'
-        tableNo='001'
-        expectInfo={'dishname':'普通菜','price':10}
-        orderInfo=self.get_order(tableId,tableNo)
-        s=helper.get_dict_value('goods',orderInfo)
-        print(s)
-        return
-    pass
-
-class FlashOrder(unittest.TestCase,testShop):
+class GetOrder(unittest.TestCase,testShop):
     #普通菜拉单、5折扣菜拉单、特价菜拉单
     def test_normal_dishes(self):
         tableId = '001'
@@ -181,14 +131,13 @@ class FlashOrder(unittest.TestCase,testShop):
         try:
             if(isinstance(orderInfo,dict)):
                 data=orderInfo.get('data')
+                #self.asserNotEqual(data,'12')
                 if(isinstance(data,dict)):
                     dishs=data.get('goods','该健不存在')
                     try:
                         print(dishs)
-                        dish=dishs.items()
                     except:
                         print()
-
             else:
                 print(orderInfo)
         except:
@@ -198,4 +147,10 @@ class FlashOrder(unittest.TestCase,testShop):
     def test_set_meal(self):
         pass
 
+    pass
+
+class MakeOrder(unittest.TestCase,testShop):
+    pass
+
+class PayOrder(unittest.TestCase,testShop):
     pass
